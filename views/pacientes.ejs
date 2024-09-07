@@ -1,0 +1,24 @@
+<%- include('layout') -%>
+<br><br><br>
+<div class="container">
+<table class="table table-striped table-hover table-responsive">
+  <tr>
+    <th>CPF</th>
+    <th>Nome</th>
+    <th>Idade</th>
+    <th>Dia Marcado</th>
+    <th>Hora Marcada</th>
+  </tr>
+  <% pacientes.forEach(paciente => { %>
+  <tr>
+    <td><%= paciente.CPF %></td>
+    <td><%= paciente.Nome %></td>
+    <td><%= paciente.Idade %></td>
+    <td><%= paciente.DiaMarcado %></td>
+    <td><%= paciente.HoraMarcada %></td>
+  </tr>
+  <% }); %>
+</table>
+
+</div>
+

@@ -1,0 +1,61 @@
+<%- include('layout') %>
+    <div class="container">
+        <h2><% title%></h2>
+        <form action="/pacientes/update/" method="POST">
+            <label class="col-sm-2 col-form-label">Selecione o Paciente</label>
+            <select class="form-control" id="paciente" name="pacienteCPF" onchange="preencherCampos()">
+                <option value="">Selecione um Paciente</option>
+                <% pacientes.forEach(paciente => { %>
+                    <option value="<%= paciente.CPF %>"><%= paciente.Nome %></option>
+                <% }); %>
+            </select>
+    </div>
+    <br><br>
+    <div class="container">
+            <div class="row mb-2">
+                <label class="col-sm-2 col-form-label" >Nome</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control form-control-lg" id="Nome" name="Nome"  required>
+                </div>
+            </div>
+
+            <div class="row mb-2">                
+                <label class="col-sm-2 col-form-label">Idade</label>
+                <div class="col-sm-10">
+                <input type="number" class="form-control form-control-lg" id="Idade" name="Idade" required>
+                </div>
+            </div>    
+
+            <div class="row mb-2">
+                <label class="col-sm-2 col-form-label" >Dia Marcado</label>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control form-control-lg" id="DiaMarcado" name="DiaMarcado"  required>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="col-sm-2 col-form-label" >Hora Marcada</label>
+                <div class="col-sm-10">
+                    <input type="time" class="form-control form-control-lg" id="HoraMarcada" name="HoraMarcada"  required>
+                </div>
+              
+            </div>
+            <button type="submit" class="btn btn-primary">Atualizar</button>
+        </form>
+    </div>
+    <script >
+    function preencherCampos() {
+    const pacienteCPF = document.getElementById('paciente').value;
+    fetch(`/pacientes/update/${pacienteCPF}`)
+        .then(response => response.json())
+        .then(paciente => {
+            document.getElementById('Nome').value = paciente.Nome;
+            document.getElementById('Idade').value = paciente.Idade;
+            document.getElementById('CPF').value = paciente.CPF;
+            document.getElementById('DiaMarcado').value = paciente.DiaMarcado;
+            document.getElementById('HoraMarcada').value = paciente.HoraMarcada;
+        })
+        .catch(error => console.error('Erro ao buscar paciente:', error));
+}
+    </script>
+ 
