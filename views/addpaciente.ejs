@@ -1,7 +1,8 @@
-<%- include('layout') -%> <br /><br /><br />
+<%- include('layout') -%>
+<br /><br /><br />
 <div class="container">
-  <h2><% title%></h2>
-  <form action="/pacientes/add" method="post">
+  <h2><%= title %></h2>
+  <form action="/pacientes/add" method="POST">
     <div class="row mb-2">
       <label class="col-sm-2 col-form-label">Nome:</label>
       <div class="col-sm-10">
@@ -9,10 +10,12 @@
           class="form-control form-control-lg"
           type="text"
           name="Nome"
+          value="<%= typeof Nome !== 'undefined' ? Nome : '' %>"
           required
         /><br /><br />
       </div>
     </div>
+    
     <div class="row mb-2">
       <label class="col-sm-2 col-form-label">Idade:</label>
       <div class="col-sm-10">
@@ -20,11 +23,14 @@
           class="form-control form-control-lg"
           type="number"
           name="Idade"
+          value="<%= typeof Idade !== 'undefined' ? Idade : '' %>"
           required
         />
       </div>
     </div>
     <br /><br />
+    
+    <!-- Campo CPF -->
     <div class="row mb-2">
       <label class="col-sm-2 col-form-label">CPF:</label>
       <div class="col-sm-10">
@@ -32,10 +38,17 @@
           class="form-control form-control-lg"
           type="text"
           name="CPF"
+          value="<%= typeof CPF !== 'undefined' ? CPF : '' %>"
           required
-        /><br /><br />
+        />
+        <!-- Exibe a mensagem de erro se CPF for inválido -->
+        <% if (typeof errorMessage !== 'undefined') { %>
+          <div class="text-danger"><%= errorMessage %></div>
+        <% } %>
+        <br /><br />
       </div>
     </div>
+
     <div class="row mb-2">
       <label class="col-sm-2 col-form-label">Dia Marcado:</label>
       <div class="col-sm-10">
@@ -43,10 +56,12 @@
           class="form-control form-control-lg"
           type="date"
           name="DiaMarcado"
+          value="<%= typeof DiaMarcado !== 'undefined' ? DiaMarcado : '' %>"
           required
         />
       </div>
     </div>
+    
     <div class="row mb-2">
       <label class="col-sm-2 col-form-label">Hora Marcada:</label>
       <div class="col-sm-10">
@@ -54,11 +69,13 @@
           class="form-control form-control-lg"
           type="time"
           name="HoraMarcada"
+          value="<%= typeof HoraMarcada !== 'undefined' ? HoraMarcada : '' %>"
           required
         /><br /><br />
       </div>
     </div>
     <br /><br />
+    
     <input class="btn btn-primary" type="submit" value="Submit" />
   </form>
 </div>
